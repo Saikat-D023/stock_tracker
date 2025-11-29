@@ -10,7 +10,7 @@ import {signInEmail} from "better-auth/api";
 import {useRouter} from "next/navigation";
 
 const SignIn = () => {
-    const router = useRouter();
+    const router = useRouter()
     const {
         register,
         handleSubmit,
@@ -33,7 +33,7 @@ const SignIn = () => {
                 description: e instanceof Error ? e.message : 'Failed to sign in.'
             })
         }
-    };
+    }
 
     return (
         <>

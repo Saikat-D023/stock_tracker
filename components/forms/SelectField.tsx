@@ -1,41 +1,53 @@
-import {Label} from "@/components/ui/label";
-import {Controller} from "react-hook-form";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+"use client"
 
-const SelectField = ({ name, label, placeholder, options, control, error, required = false }: SelectFieldProps) => {
-    return (
-        <div className="space-y-2">
-            <Label htmlFor={name} className="form-label">{label}</Label>
+import * as React from "react"
+import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
-            <Controller
-                name={name}
-                control={control}
-                rules={{
-                    required: required ? `Please select ${label.toLowerCase()}` : false,
-                }}
-                render={({ field }) => (
-                    <Select value={field.value} onValueChange={field.onChange}>
-                        <SelectTrigger className="select-trigger">
-                            <SelectValue placeholder={placeholder} />
-                        </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-600 text-white">
-                            {options.map((option) => (
-                                <SelectItem value={option.value} key={option.value} className="focus:bg-gray-600 focus:text-white">
-                                    {option.label}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                        {error && <p className="text-sm text-red-500">{error.message}</p>}
-                    </Select>
-                )}
-            />
-        </div>
-    )
+import { cn } from "@/lib/utils"
+
+function Avatar({
+  className,
+  ...props
+}: React.ComponentProps<typeof AvatarPrimitive.Root>) {
+  return (
+    <AvatarPrimitive.Root
+      data-slot="avatar"
+      className={cn(
+        "relative flex size-8 shrink-0 overflow-hidden rounded-full",
+        className
+      )}
+      {...props}
+    />
+  )
 }
-export default SelectField
+
+function AvatarImage({
+  className,
+  ...props
+}: React.ComponentProps<typeof AvatarPrimitive.Image>) {
+  return (
+    <AvatarPrimitive.Image
+      data-slot="avatar-image"
+      className={cn("aspect-square size-full", className)}
+      {...props}
+    />
+  )
+}
+
+function AvatarFallback({
+  className,
+  ...props
+}: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
+  return (
+    <AvatarPrimitive.Fallback
+      data-slot="avatar-fallback"
+      className={cn(
+        "bg-muted flex size-full items-center justify-center rounded-full",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Avatar, AvatarImage, AvatarFallback }

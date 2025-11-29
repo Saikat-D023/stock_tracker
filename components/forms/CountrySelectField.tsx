@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useState } from 'react';
@@ -24,7 +25,6 @@ import countryList from 'react-select-country-list';
 type CountrySelectProps = {
     name: string;
     label: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     control: Control<any>;
     error?: FieldError;
     required?: boolean;
